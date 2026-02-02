@@ -1,0 +1,24 @@
+{
+  "site": {
+    "title": "AZ'TECH - Cerveza Artesanal",
+    "description": "Bière artisanale sans gluten aux saveurs aztèques"
+  },
+  "contact": {
+    "email": "aztech34090@gmail.com",
+    "phone": "+33 7 43 32 45 39",
+    "address": "99 Avenue d'Occitanie",
+    "postal_code": "34090",
+    "city": "Montpellier",
+    "country": "France",
+    "social": {
+      "instagram": "@aztech_off"
+    }
+  },
+  "product": {
+    "name": "AZ'TECH",
+    "tagline": "Bière Sans Gluten aux Saveurs Aztèques",
+    "alcohol": "7,5% vol",
+    "volume": "75cl",
+    "gluten_free": true
+  }
+}

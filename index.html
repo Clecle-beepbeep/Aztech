@@ -1,0 +1,416 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ'TECH - Cerveza Artesanal | Projet SAE BUT TC</title>
+    
+    <!-- Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.js pour la bouteille 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    
+    
+    <!-- Fichiers externes -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <!-- BULLES AU SCROLL -->
+    <div class="scroll-bubbles-container" id="scrollBubbles"></div>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loader-logo">
+            <img id="loader-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="AZ'TECH Logo">
+        </div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <!-- PARTICLES BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-container">
+                <img id="nav-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="AZ'TECH" class="logo-img">
+                <span class="logo-text">AZ'TECH</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#composition">Composition</a></li>
+                <li><a href="#apropos">À Propos</a></li>
+                <li><a href="#contact" class="cta-button">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <div class="hero-badge">Projet SAE • BUT TC • Simulation Commerciale</div>
+            <div style="text-align: center; margin: 2rem 0;"><img src="images/LOGO.png" alt="AZ'TECH" style="max-width: 500px; width: 90%; height: auto; filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8));"></div>
+            <div class="hero-subtitle">CERVEZA ARTESANAL</div>
+            <p class="hero-description">
+                Une bière artisanale d'exception, brassée selon un savoir-faire ancestral.
+                
+            </p>
+            <div class="hero-buttons">
+                <a href="#produits" class="btn-primary">Découvrir</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- BOUTEILLE 3D SECTION -->
+    <section class="bottle-3d-section" id="bouteille">
+        <div class="section-header fade-in">
+            <div class="section-badge">Expérience Interactive</div>
+            <h2 class="section-title">Découvrez la Bouteille en 3D</h2>
+            <p class="section-description">
+                Explorez notre bouteille sous tous les angles. Faites glisser pour tourner.
+            </p>
+        </div>
+        <div class="bottle-3d-container">
+            <div class="bottle-3d-viewer fade-in">
+                <div id="three-container"></div>
+                <div class="bottle-3d-controls">
+                    <button class="control-btn" id="reset-view">↻</button>
+                    <button class="control-btn" id="zoom-in">+</button>
+                    <button class="control-btn" id="zoom-out">−</button>
+                </div>
+            </div>
+            <div class="bottle-3d-info fade-in">
+                <h2>AZ'TECH</h2>
+                <p class="section-description">
+                    Une bière lager artisanale audacieuse, infusée au piment jalapeño et sans gluten.
+                    Une expérience gustative unique, qui marie la douceur du maïs à la chaleur maîtrisée du piment.
+                    Une expérience gustative unique qui marie la douceur du maïs
+                    à la chaleur maîtrisée du piment.
+                </p>
+                <ul class="bottle-features">
+                    <li><strong>Design unique</strong> inspiré de la culture aztèque</li>
+                    <li><strong>Bouteille ambrée</strong> de 75cl</li>
+                    <li><strong>Étiquette détaillée</strong> avec illustrations</li>
+                </ul>
+                <div class="specs-grid">
+                    <div class="spec-item scale-in">
+                        <div class="spec-label">Alcool</div>
+                        <div class="spec-value">7,5% vol</div>
+                    </div>
+                    <div class="spec-item scale-in">
+                        <div class="spec-label">Volume</div>
+                        <div class="spec-value">75cl</div>
+                    </div>
+                    <div class="spec-item scale-in">
+                        <div class="spec-label">Type</div>
+                        <div class="spec-value">Lager</div>
+                    </div>
+                    <div class="spec-item scale-in">
+                        <div class="spec-label">Sans Gluten</div>
+                        <div class="spec-value">✓</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <!-- ================================
+         SECTION LA BIÈRE - MODÈLE 3D
+         ================================ -->
+    <section class="labiere-section" id="labiere">
+        <div class="section-header fade-in">
+            <div class="section-badge">Modèle 3D Interactif</div>
+            <h2 class="section-title">La Bière</h2>
+            <p class="section-description">
+                Découvrez notre bouteille AZ'TECH en 3D - Faites-la tourner avec votre souris
+            </p>
+        </div>
+        <div class="labiere-container">
+            <div class="labiere-3d-wrapper">
+                <div class="labiere-3d" id="labiere3d">
+                    <div class="loading-3d">
+                        <div class="loader-spinner"></div>
+                        <p>Chargement du modèle 3D...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="labiere-info">
+                <h3>AZ'TECH</h3>
+                <p class="labiere-tagline">Lager Artisanale Sans Gluten</p>
+                <p class="labiere-description">
+                    Une bière lager artisanale audacieuse, infusée au piment jalapeño et sans gluten. 
+                    Une expérience gustative unique qui marie la douceur du maïs à la chaleur maîtrisée du piment.
+                </p>
+                <ul class="labiere-specs">
+                    <li>
+                        <span class="spec-label">Volume</span>
+                        <span class="spec-value">75cl</span>
+                    </li>
+                    <li>
+                        <span class="spec-label">Alcool</span>
+                        <span class="spec-value">7,5% vol</span>
+                    </li>
+                    <li>
+                        <span class="spec-label">Type</span>
+                        <span class="spec-value">Lager</span>
+                    </li>
+                    <li>
+                        <span class="spec-label">Sans Gluten</span>
+                        <span class="spec-value">✓</span>
+                    </li>
+                </ul>
+                <div class="labiere-hint">
+                    💡 <strong>Astuce :</strong> Cliquez et glissez pour faire tourner le modèle 3D
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+    <!-- PRODUITS SECTION -->
+    <section class="products-section" id="produits">
+        <div class="section-header fade-in">
+            <div class="section-badge">Nos Créations</div>
+            <h2 class="section-title">Nos Bières Artisanales</h2>
+            <p class="section-description">
+                Découvrez notre gamme de bières artisanales, brassées avec passion et savoir-faire.
+            </p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card scale-in">
+                <div class="product-image">
+                    <div class="product-badge">Format Unique</div>
+                    <img id="product-single" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Bouteille 75cl">
+                </div>
+                <div class="product-info">
+                    <h3>AZ'TECH - Format Standard</h3>
+                    <p class="product-description">
+                        Notre format unique pour partager des moments d'exception.
+                        Une bouteille généreuse parfaite pour accompagner vos repas festifs.
+                    </p>
+                    <div class="product-specs">
+                        <div class="product-spec">
+                            <span class="product-spec-label">Volume</span>
+                            <span class="product-spec-value">75cl</span>
+                        </div>
+                        <div class="product-spec">
+                            <span class="product-spec-label">Alcool</span>
+                            <span class="product-spec-value">7,5%</span>
+                        </div>
+                        <div class="product-spec">
+                            <span class="product-spec-label">Type</span>
+                            <span class="product-spec-value">Lager</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-in">
+                <div class="product-image">
+                    <div class="product-badge">Exclusif</div>
+                    <img id="product-pack" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Pack Découverte">
+                </div>
+                <div class="product-info">
+                    <h3>Pack Découverte</h3>
+                    <p class="product-description">
+                        Un coffret cadeau élégant contenant 2 bouteilles de 75cl.
+                        Le cadeau parfait pour les amateurs de bières artisanales d'exception.
+                    </p>
+                    <div class="product-specs">
+                        <div class="product-spec">
+                            <span class="product-spec-label">Contenu</span>
+                            <span class="product-spec-value">2x75cl</span>
+                        </div>
+                        <div class="product-spec">
+                            <span class="product-spec-label">Packaging</span>
+                            <span class="product-spec-value">Premium</span>
+                        </div>
+                        <div class="product-spec">
+                            <span class="product-spec-label">Idée</span>
+                            <span class="product-spec-value">Cadeau</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPOSITION SECTION -->
+    <section class="composition-section" id="composition">
+        <div class="section-header fade-in">
+            <div class="section-badge">Ingrédients Sélectionnés</div>
+            <h2 class="section-title">Composition</h2>
+            <p class="section-description">
+                Une recette maîtrisée, des ingrédients sélectionnés avec soin pour une vraie identité en bouche.
+            </p>
+        </div>
+        <div class="composition-container">
+            <div class="composition-image slide-in-left">
+                <img id="label-back" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Composition">
+            </div>
+            <div class="composition-content slide-in-right">
+                <h2>Nos Ingrédients</h2>
+                <p class="section-description">
+                    Brassée selon un savoir-faire artisanal, cette bière lager allie
+                    authenticité et caractère. Une recette maîtrisée, des ingrédients
+                    sélectionnés et une vraie identité en bouche.
+                </p>
+                <ul class="ingredients-list">
+                    <li class="ingredient-item">
+                        <h4>◆ Flocons de Maïs</h4>
+                        <p>Apportent douceur et légèreté</p>
+                    </li>
+                    <li class="ingredient-item">
+                        <h4>◆ Sorgho</h4>
+                        <p>Une note légère et céréalière</p>
+                    </li>
+                    <li class="ingredient-item">
+                        <h4>◆ Piment Jalapeños (Infusion)</h4>
+                        <p>Apportent un goût épicé et pimenté sans piquer</p>
+                    </li>
+                    <li class="ingredient-item">
+                        <h4>◆ Harissa</h4>
+                        <p>Touche épicée subtile pour un équilibre parfait</p>
+                    </li>
+                </ul>
+                <div class="allergen-notice">
+                    <p><strong>⚠ Attention :</strong> Peut contenir des traces de gluten.</p>
+                    <p style="margin-top: 1rem;">
+                        Brassée et embouteillée à l'IUT de Montpellier<br>
+                        99 Avenue d'Occitanie, 34090 Montpellier, France<br>
+                        <strong>Alc. 7,5% vol</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="apropos">
+        <div class="section-header fade-in">
+            <div class="section-badge">Notre Histoire</div>
+            <h2 class="section-title">À Propos</h2>
+        </div>
+        <div class="about-container">
+            <div class="about-content fade-in">
+                <p>
+                    <strong>AZ'TECH</strong> est née de la passion pour le brassage artisanal et
+                    l'envie de créer une bière d'exception. Inspirée par la culture aztèque
+                    et les saveurs audacieuses, notre bière marie tradition et innovation.
+                </p>
+                <p>
+                    Chaque bouteille est le fruit d'un travail minutieux, d'ingrédients
+                    soigneusement sélectionnés et d'un savoir-faire transmis avec passion.
+                    Notre engagement : vous offrir une expérience gustative unique et mémorable.
+                </p>
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(196, 30, 58, 0.1); border: 2px solid var(--red); border-radius: 20px;">
+                    <h3 style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 1rem; text-align: center;">
+                        ℹ️ À Propos de ce Site
+                    </h3>
+                    <p style="text-align: center; line-height: 1.8;">
+                        Ce site web est un <strong>projet de présentation académique</strong> réalisé dans le cadre d'une 
+                        <strong>SAE (Situation d'Apprentissage et d'Évaluation)</strong> en BUT Techniques de Commercialisation.<br><br>
+                        Il s'agit d'une <strong>simulation commerciale</strong>  présentée uniquement à caractère pédagogique .
+                    </p>
+                </div>
+            </div>
+            <div class="about-features">
+                <div class="feature-card scale-in">
+                    <div class="feature-icon">⬥</div>
+                    <h3>Tradition</h3>
+                    <p>
+                        Inspirée par le peuple Aztèque, pour qui le maïs et le jalapeño étaient bien plus que des ingrédients : des symboles sacrés au cœur de leur culture et de leurs rituels ancestraux.
+                    </p>
+                </div>
+                <div class="feature-card scale-in">
+                    <div class="feature-icon">✦</div>
+                    <h3>Technique</h3>
+                    <p>
+                        Un savoir-faire artisanal minutieux alliant méthodes traditionnelles de brassage et techniques modernes. Chaque étape est maîtrisée pour garantir qualité, équilibre et authenticité.
+                    </p>
+                </div>
+                <div class="feature-card scale-in">
+                    <div class="feature-icon">◈</div>
+                    <h3>Caractère</h3>
+                    <p>
+                        Un goût unique et audacieux : la douceur céréalière du maïs rencontre la chaleur pimentée du jalapeño. Une expérience gustative mémorable qui surprend et séduit.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="section-header fade-in">
+                <div class="section-badge">Prenez Contact</div>
+                <h2 class="section-title">Contact</h2>
+                <p class="section-description">
+                    Vous souhaitez en savoir plus sur nos bières ?
+                    N'hésitez pas à nous contacter.
+                </p>
+            </div>
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <div class="contact-label">Adresse</div>
+                    <div class="contact-value">
+                        <a href="https://www.google.com/maps/search/?api=1&query=99+Avenue+d%27Occitanie+34090+Montpellier+France" target="_blank" style="color:var(--light);text-decoration:none">📍 99 Avenue d'Occitanie<br>&nbsp;&nbsp;&nbsp;&nbsp;34090 Montpellier, France</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">
+                        <a href="/cdn-cgi/l/email-protection#284b47465c494b5c6849525c4d4b40054a4d4d5a064e5a"><span class="__cf_email__" data-cfemail="4c2f2322382d2f380c2d3638292f24612e29293e622a3e">[email&#160;protected]</span></a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Téléphone</div>
+                    <div class="contact-value">
+                        <a href="tel:07 43 32 45 39">07 43 32 45 39</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Instagram</div>
+                    <div class="contact-value">
+                        <a href="https://instagram.com/aztech_off" target="_blank" style="color:var(--light);text-decoration:none">📷 @aztech_off</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img id="footer-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="AZ'TECH">
+                <span>AZ'TECH</span>
+            </div>
+            <div class="footer-text">
+                © 2026 AZ'TECH Cerveza Artesanal - Projet SAE BUT TC<br>
+                <strong style="color: #c41e3a;">⚠ Site de présentation académique - Simulation commerciale non contractuelle</strong><br>
+                L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon">F</a>
+                <a href="#" class="social-icon">IG</a>
+                <a href="#" class="social-icon">X</a>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
